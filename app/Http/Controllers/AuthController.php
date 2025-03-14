@@ -19,10 +19,15 @@ class AuthController extends Controller
         if (!$token) {
             // credentials are valid
             return response()->json([
+                "status" => "falid",
                 "error" => 'Email e/ou Senha Incorretos'
             ], 401);
         }
-        return response()->json([$token]);
+        return response()->json([
+            "status" => "success",
+            "token" => $token,
+            "type" => "bearer"
+        ]);
     }
 
     public function register(Request $request)
