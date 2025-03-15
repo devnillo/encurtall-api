@@ -57,4 +57,17 @@ class RoutesController extends Controller
         }
         return $route;
     }
+    public function redirectToRoute($uri)
+    {
+        $rota = Route::all()->where('uri', '=', $uri);
+        return redirect('http://'.$rota[0]->link);
+    }
+    public function linkToRedirect($uri)
+    {
+        $rota = Route::all()->where('uri', '=', $uri);
+        return response()->json([
+            "status" => "success",
+            "data" => $rota[0]->link
+        ]);
+    }
 }
