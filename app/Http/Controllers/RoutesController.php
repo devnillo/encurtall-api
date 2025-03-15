@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 
 class RoutesController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
     public function createRoute(Request $request){
         $cretentials = $request->validate([
             'uri' => 'unique:routes',
             'link' => 'required',
             'user_id' => 'required'
-            
         ]);
         if($cretentials)
         {
@@ -33,7 +36,6 @@ class RoutesController extends Controller
         {
             return response()->json(["error" => "sem rotas"], 404);
         }
-
         return $route;
     }
     public function updateRoute(Request $request, $route)
@@ -49,12 +51,10 @@ class RoutesController extends Controller
     }
     public function deleteRoute($route)
     {
-        
         if(empty($route[0]))
         {
             return response()->json(["error" => "sem rotas"], 404);
         }
-
         return $route;
     }
 }
