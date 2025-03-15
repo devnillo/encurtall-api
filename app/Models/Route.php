@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Route extends Model
 {
     //
+    protected $fillable = [
+        'uri',
+        'link',
+        'user_id',
+    ];
 }
